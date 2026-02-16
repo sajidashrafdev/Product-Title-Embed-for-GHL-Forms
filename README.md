@@ -23,3 +23,28 @@ It supports single product pages, loop/grid product listings, and dynamically lo
 
 ```html
 <script src="product-title-embed.js"></script>
+
+
+How It Works
+
+Detects product clicks in a loop/grid or the current product page.
+
+Retrieves the product title from the page or clicked card.
+
+Adds the product title as a query parameter to the parent page URL.
+
+Finds the GHL form iframe and reloads it so the title is populated automatically.
+
+Clears the cached title after 1.5 seconds to avoid conflicts.
+
+Usage Example
+<!-- Include your script -->
+<script src="product-title-embed.js"></script>
+
+<!-- GHL Form Popup Example -->
+<div class="elementor-popup-modal">
+    <iframe data-form-id="4PxHT6jQ2Ztl4GftkTAw" src="https://your-ghl-form-link"></iframe>
+</div>
+
+---
+
