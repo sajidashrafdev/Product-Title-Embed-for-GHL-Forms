@@ -1,8 +1,8 @@
 <script>
 (function(){
-  var PARAM_KEY = 'product_title';
-  var FORM_ID   = '4PxHT6jQ2Ztl4GftkTAw';
-  var lastClickedTitle = '';
+  var PARAM_KEY = ''; // set this to the query param key your form uses to capture product title, e.g. 'product'
+  var FORM_ID   = ''; // set this to your GHL form ID (the number in the form's iframe src URL)
+  var lastClickedTitle = ''; // temp store for title from product click
 
   function normalizeText(t){ return (t||'').trim().replace(/\s+/g,' '); }
 
