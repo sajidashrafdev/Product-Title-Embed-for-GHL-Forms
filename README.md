@@ -24,6 +24,10 @@ It supports single product pages, loop/grid product listings, and dynamically lo
 ```html
 <script src="product-title-embed.js"></script>
 
+Update the following variables if needed:
+
+var PARAM_KEY = 'product_title'; // Query parameter key
+var FORM_ID   = 'YOUR_GHL_FORM_ID'; // Replace with your GHL form ID
 
 How It Works
 
@@ -36,15 +40,3 @@ Adds the product title as a query parameter to the parent page URL.
 Finds the GHL form iframe and reloads it so the title is populated automatically.
 
 Clears the cached title after 1.5 seconds to avoid conflicts.
-
-Usage Example
-<!-- Include your script -->
-<script src="product-title-embed.js"></script>
-
-<!-- GHL Form Popup Example -->
-<div class="elementor-popup-modal">
-    <iframe data-form-id="4PxHT6jQ2Ztl4GftkTAw" src="https://your-ghl-form-link"></iframe>
-</div>
-
----
-
