@@ -42,3 +42,53 @@
            document.querySelector('iframe#inline-'+FORM_ID) ||
            document.querySelector('iframe[src*="/widget/form/'+FORM_ID+'"]');
   }
+
+    function applyTitle(){
+    var title = resolveTitle();
+    if (!title) return;
+
+    // 1) Put param on the PARENT page URL (no reload)
+    var newPageUrl = setQueryParam(window.location.href, PARAM_KEY, title);
+    window.history.replaceState({}, '', newPageUrl);
+
+    // 2) Refresh iframe once so embed re-reads parent params
+    var iframe = findFormIframe();
+    if (iframe && iframe.dataset.refreshedForTitle !== title){
+      iframe.dataset.refreshedForTitle = title;
+      var src = iframe.getAttribute('src') || iframe.src;
+      // force reload same src
+      iframe.src = src;
+    }
+
+    // clear click title after use
+    setTimeout(function(){ lastClickedTitle = ''; }, 1500);
+  }
+
+  // capture product clicked in loop/grid
+  document.addEventListener('click', function(e){
+    var trigger = e.target.closest('a, button');
+    if (!trigger) return;
+
+    var card =
+      trigger.closest('li.product') ||
+      trigger.closest('.product') ||
+      trigger.closest('[data-product_id]');
+
+    if (!card) return;
+
+    var t = getTitleFromCard(card);
+    if (t) lastClickedTitle = t;
+  }, true);
+
+  // detect popup open
+  var obs = new MutationObserver(function(){
+    if (document.querySelector('.elementor-popup-modal')) {
+      [50, 250, 800, 1500].forEach(function(ms){
+        setTimeout(applyTitle, ms);
+      });
+    }
+  });
+  obs.observe(document.documentElement, {childList:true, subtree:true});
+
+})();
+</script>
