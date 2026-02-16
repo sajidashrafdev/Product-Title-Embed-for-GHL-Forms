@@ -20,3 +20,25 @@
       card.querySelector('a.woocommerce-LoopProduct-link');
     return el ? normalizeText(el.textContent) : '';
   }
+
+    function resolveTitle(){
+    return lastClickedTitle || getSingleProductTitle();
+  }
+
+  function setQueryParam(url, key, val){
+    try{
+      var u = new URL(url, window.location.origin);
+      u.searchParams.set(key, val);
+      return u.toString();
+    }catch(e){
+      var sep = url.indexOf('?') === -1 ? '?' : '&';
+      return url + sep + key + '=' + encodeURIComponent(val);
+    }
+  }
+
+  function findFormIframe(){
+    return document.querySelector('.elementor-popup-modal iframe[data-form-id="'+FORM_ID+'"]') ||
+           document.querySelector('iframe[data-form-id="'+FORM_ID+'"]') ||
+           document.querySelector('iframe#inline-'+FORM_ID) ||
+           document.querySelector('iframe[src*="/widget/form/'+FORM_ID+'"]');
+  }
